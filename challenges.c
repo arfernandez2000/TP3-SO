@@ -11,22 +11,20 @@ void messageQ(char* question){
 }
 
 void filter(){
-	char *s = "La respuesta es K5n2UFfpFMUN";
-    int len = strlen(s);
-    char aux[2];
-    aux[1] = 0;
+	char *str = "La respuesta es K5n2UFfpFMUN";
+    int len = strlen(str);
 
-    int num = (rand() % (UPPER - LOWER + 1)) + LOWER;
-    int i,j;
-    for ( i = 0, j = 0; i < num || j < len;) {
-        if ((rand() % 2) && j < len) {
-            aux[0] = s[j++];
-            write(STDOUT_FILENO, aux, 1);
-        } else {
-            aux[0] = (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR;
-            write(STDERR_FILENO, aux, 1);
-            i++;
+    srand(getpid());
+
+    for (int i = 0; i < len; i++) {
+        int limit = (rand() % 11);
+        for (int j = 0; j < limit; j++) {
+            char toPrint[2] = {0};
+            toPrint[0] = (rand() % (126 - 32 + 1) + 32);
+            write(STDERR_FILENO, toPrint, 1);
         }
+
+        write(STDOUT_FILENO, str + i, 1);
     }
     printf("\n\n");
 }
@@ -57,18 +55,18 @@ void ch4(){
 }
 
 void ch5(){
-	messageCh("respuesta = strings:277");
+	messageCh("respuesta = strings:277"); //TODO: ver como cambiar o hacer que aparezca too_easy en el strings
 	messageQ("¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?");
 }
 
 void ch6(){
-	messageCh(".data .bss .comment ? .shstrtab .symtab .strtab");
+	messageCh(".data .bss .comment ? .shstrtab .symtab .strtab"); //TODO: ver como hacer para que aparezca el .RUN_ME en el strings
 	messageQ("Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. ¿Qué conviene más?");
 }
 
 void ch7(){
 	messageCh("Filter error");
-	filter();
+	filter(); //TODO: al redirigirlo igual no funciona
 	messageQ("¿Cómo se puede implementar un servidor que atienda muchas conexiones sin usar procesos ni threads?");
 }
 
