@@ -1,5 +1,5 @@
-#ifndef SO_TP3_SOCKETS_CHALLENGES_H
-#define SO_TP3_SOCKETS_CHALLENGES_H
+#ifndef CHALLENGES_H
+#define CHALLENGES_H
 
 #include <unistd.h>
 #include <stdio.h>
@@ -7,31 +7,39 @@
 #include <string.h>
 
 #define TOTAL_CH 12
+#define ANS_SIZE 20
+#define LOWER 70
+#define UPPER 100
+#define MIN_CHAR 33
+#define MAX_CHAR 126
 
-typedef int (*ch)(char *, size_t, FILE *);
+typedef struct {
+    void (*number)();
+    char ans[ANS_SIZE];
+} ch_t;
 
-int ch1(char *ans, size_t len, FILE *serverIn);
+int ch1();
 
-int ch2(char *ans, size_t len, FILE *serverIn);
+int ch2();
 
-int ch3(char *ans, size_t len, FILE *serverIn);
+int ch3();
 
-int ch4(char *ans, size_t len, FILE *serverIn);
+int ch4();
 
-int ch5(char *ans, size_t len, FILE *serverIn);
+int ch5();
 
-int ch6(char *ans, size_t len, FILE *serverIn);
+int ch6();
 
-int ch7(char *ans, size_t len, FILE *serverIn);
+int ch7();
 
-int ch8(char *ans, size_t len, FILE *serverIn);
+int ch8();
 
-int ch9(char *ans, size_t len, FILE *serverIn);
+int ch9();
 
-int ch10(char *ans, size_t len, FILE *serverIn);
+int ch10();
 
-int ch11(char *ans, size_t len, FILE *serverIn);
+int ch11();
 
-int ch12(char *ans, size_t len, FILE *serverIn);
+int ch12();
 
 #endif //SO_TP3_SOCKETS_CHALLENGES_H

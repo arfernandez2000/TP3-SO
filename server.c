@@ -12,19 +12,27 @@
 #define SO_REUSEPORT 15
 
 
-ch challenges[TOTAL_CH] = {ch1, ch2, ch3, ch4, ch5,
-                           ch6, ch7, ch8, ch9,
-                           ch10, ch11, ch12};
-
-char* resp[12] = {"entendido\n", "itba\n", "M4GFKZ289aku\n", "fk3wfLCm3QvS\n", "too_easy\n", ".RUN_ME\n", "K5n2UFfpFMUN\n", 
-				"BUmyYq5XxXGt\n", "u^v\n", "chin_chu_lan_cha\n", "gdb_rules\n", "normal\n"};
-
+ch_t challenges[TOTAL_CH] = {{&ch1,"entendido\n"}, {&ch2,"itba\n"}, {&ch3, "M4GFKZ289aku\n"}, {&ch4, "fk3wfLCm3QvS\n"}, {&ch5, "too_easy\n"},
+                           {&ch6, ".RUN_ME\n"}, {&ch7, "K5n2UFfpFMUN\n"}, {&ch8, "BUmyYq5XxXGt\n"}, {&ch9, "u^v\n"},
+                           {&ch10, "chin_chu_lan_cha\n"}, {&ch11, "gdb_rules\n"}, {&ch12, "normal\n"}};
 
 int checkAns(char* answer, char* resp){
-
+	return 0;
 }
 
 int main(int argc, char const *argv[]) {
+	int count = 0
+    
+    while (count < TOTAL_CH ) {
+        ch_t challenge = challenges[count];
+        (challenge.number)(count);
+        //ver como conseguir la resp 
+        //con read??
+        //checkAns(challange.ans)
+    }
+
+    if (count >= TOTAL_CH)
+        printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
 
     return 0;
-} 
+}
