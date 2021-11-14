@@ -1,17 +1,33 @@
 #include "challenges.h"
 
-char* resp[12] = {"entendido\n", "itba\n", "M4GFKZ289aku\n", "fk3wfLCm3QvS\n", "too_easy\n", ".RUN_ME\n", "K5n2UFfpFMUN\n", 
-				"BUmyYq5XxXGt\n", "u^v\n", "chin_chu_lan_cha\n", "gdb_rules\n", "normal\n"};
-
 void messageCh(char* challenge){
 	printf("------------- DESAFIO -------------\n");
-	printf("%s\n", challange);
-	printf("\n\n");
+	printf("%s\n\n", challange);
 }
 
 void messageQ(char* question){
 	printf("----- PREGUNTA PARA INVESTIGAR -----\n");
 	printf("%s\n", question);
+}
+
+filter(){
+	char *s = "La respuesta es K5n2UFfpFMUN";
+    int len = strlen(s);
+    char aux[2];
+    aux[1] = 0;
+
+    int num = (rand() % (UPPER - LOWER + 1)) + LOWER;
+    int i,j;
+    for ( i = 0, j = 0; i < num || j < len;) {
+        if ((rand() % 2) && j < len) {
+            aux[0] = s[j++];
+            write(STDOUT_FILENO, aux, 1);
+        } else {
+            aux[0] = (rand() % (MAX_CHAR - MIN_CHAR + 1)) + MIN_CHAR;
+            write(STDERR_FILENO, aux, 1);
+            i++;
+        }
+    }
 }
 
 void ch1(){
@@ -35,7 +51,11 @@ void ch3(){
 }
 
 void ch4(){
-	messageCh("EBADF...\n\nwrite: Bad file descriptor");
+	messageCh("EBADF...");
+
+	if (write(13, aux, strlen(aux)) == -1)
+        perror("write");
+
 	messageQ("¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?");
 }
 
@@ -50,12 +70,14 @@ void ch6(){
 }
 
 void ch7(){
-	messageCh("Filter error\n\n" + filter("La respuesta es K5n2UFfpFMUN"));
+	messageCh("Filter error");
+	filter();
 	messageQ("¿Cómo se puede implementar un servidor que atienda muchas conexiones sin usar procesos ni threads?");
 }
 
 void ch8(){
-	messageCh("¿?\n" + pinttBlack("La respuesta es BUmyYq5XxXGt"));
+	messageCh("¿?");
+	printf("\033[0;30mLa respuesta es BUmyYq5XxXGt\033[0m\n");
 	messageQ("¿Qué aplicaciones se pueden utilizar para ver el tráfico por la red?");
 }
 
@@ -85,4 +107,3 @@ void ch12(){
 
 }
 
-//Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto

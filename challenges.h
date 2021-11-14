@@ -18,28 +18,28 @@ typedef struct {
     char ans[ANS_SIZE];
 } ch_t;
 
-int ch1();
+void ch1();
 
-int ch2();
+void ch2();
 
-int ch3();
+void ch3();
 
-int ch4();
+void ch4();
 
-int ch5();
+void ch5();
 
-int ch6();
+void ch6();
 
-int ch7();
+void ch7();
 
-int ch8();
+void ch8();
 
-int ch9();
+void ch9();
 
-int ch10();
+void ch10();
 
-int ch11();
+void ch11();
 
-int ch12();
+void ch12();
 
 #endif //SO_TP3_SOCKETS_CHALLENGES_H
