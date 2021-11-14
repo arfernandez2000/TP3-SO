@@ -2,7 +2,7 @@
 
 void messageCh(char* challenge){
 	printf("------------- DESAFIO -------------\n");
-	printf("%s\n\n", challange);
+	printf("%s\n\n", challenge);
 }
 
 void messageQ(char* question){
@@ -10,7 +10,7 @@ void messageQ(char* question){
 	printf("%s\n", question);
 }
 
-filter(){
+void filter(){
 	char *s = "La respuesta es K5n2UFfpFMUN";
     int len = strlen(s);
     char aux[2];
@@ -28,15 +28,11 @@ filter(){
             i++;
         }
     }
+    printf("\n\n");
 }
 
 void ch1(){
-	messageCh("Bienvenidos al TP3 y felicitaciones, ya resolvieron el primer acertijo.\n\nEn este TP deberán finalizar el juego que ya comenzaron resolviendo los desafíos de cada nivel.\n
-	Además tendrán que investigar otras preguntas para responder durante la defensa.\n
-	El desafío final consiste en crear un programa que se comporte igual que yo, es decir, que provea los mismos desafíos y que sea necesario hacer lo mismo para resolverlos. No basta con esperar la respuesta.\n
-	Además, deberán implementar otro programa para comunicarse conmigo.\n\n
-	Deberán estar atentos a los easter eggs.\n\n
-	Para verificar que sus respuestas tienen el formato correcto respondan a este desafío con la palabra 'entendido\\n'");
+	messageCh("Bienvenidos al TP3 y felicitaciones, ya resolvieron el primer acertijo.\n\nEn este TP deberán finalizar el juego que ya comenzaron resolviendo los desafíos de cada nivel.\nAdemás tendrán que investigar otras preguntas para responder durante la defensa.\n El desafío final consiste en crear un programa que se comporte igual que yo, es decir, que provea los mismos desafíos y que sea necesario hacer lo mismo para resolverlos. No basta con esperar la respuesta.\nAdemás, deberán implementar otro programa para comunicarse conmigo.\n\nDeberán estar atentos a los easter eggs.\n\nPara verificar que sus respuestas tienen el formato correcto respondan a este desafío con la palabra 'entendido\\n'");
 	messageQ("¿Cómo descubrieron el protocolo, la dirección y el puerto para conectarse?");
 }
 
@@ -53,9 +49,10 @@ void ch3(){
 void ch4(){
 	messageCh("EBADF...");
 
-	if (write(13, aux, strlen(aux)) == -1)
+	char *str = "La respuesta es fk3wfLCm3QvS\n";
+	if (write(13, str, strlen(str)) == -1)
         perror("write");
-
+    printf("\n");
 	messageQ("¿Qué útil abstracción es utilizada para comunicarse con sockets? ¿se puede utilizar read(2) y write(2) para operar?");
 }
 
@@ -77,16 +74,12 @@ void ch7(){
 
 void ch8(){
 	messageCh("¿?");
-	printf("\033[0;30mLa respuesta es BUmyYq5XxXGt\033[0m\n");
+	printf("\033[30;40mLa respuesta es BUmyYq5XxXGt\033[0m\n");
 	messageQ("¿Qué aplicaciones se pueden utilizar para ver el tráfico por la red?");
 }
 
 void ch9(){
-	messageCh("Latexme\n\n
-	Si
-	 \\mathrm{d}y = u^v{\\cdot}(v'{\\cdot}\\ln{(u)}+v{\\cdot}\\frac{u'}{u})
-	entonces
-	y =");
+	messageCh("Latexme\n\nSi\n \\mathrm{d}y = u^v{\\cdot}(v\'{\\cdot}\\ln{(u)}+v{\\cdot}\\frac{u\'}{u})\nentonces\ny =");
 	messageQ("sockets es un mecanismo de IPC. ¿Qué es más eficiente entre sockets y pipes?");
 }
 
@@ -98,12 +91,10 @@ void ch10(){
 void ch11(){
 	messageCh("b gdbme y encontrá el valor mágico");
 	messageQ("¿Qué es un RFC?");
-
 }
 
 void ch12(){
 	messageCh("Me conoces");
 	messageQ("¿Fue divertido?");
-
 }
 

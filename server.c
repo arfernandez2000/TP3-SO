@@ -21,14 +21,16 @@ int checkAns(char* answer, char* resp){
 }
 
 int main(int argc, char const *argv[]) {
-	int count = 0
+	int count = 0;
     
     while (count < TOTAL_CH ) {
-        ch_t challenge = challenges[count];
-        (challenge.number)(count);
+        ch_t challenge = challenges[count++];
+        (challenge.number)();
         //ver como conseguir la resp 
         //con read??
         //checkAns(challange.ans)
+        sleep(5);
+        system("clear");
     }
 
     if (count >= TOTAL_CH)
