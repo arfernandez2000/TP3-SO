@@ -114,11 +114,5 @@ int main(int argc, char const *argv[]) {
         myError("close1 failed");
     }
 
-    printf("%d\n", socketFd);
-
-    if (close(socketFd) == ERROR) {
-        myError("close2 failed");
-    }
-
     return 0;
 }
