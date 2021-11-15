@@ -17,7 +17,7 @@
 
 ch_t challenges[TOTAL_CH] = {{&ch1,"entendido\n"}, {&ch2,"itba\n"}, {&ch3, "M4GFKZ289aku\n"}, {&ch4, "fk3wfLCm3QvS\n"}, {&ch5, "too_easy\n"},
                            {&ch6, ".RUN_ME\n"}, {&ch7, "K5n2UFfpFMUN\n"}, {&ch8, "BUmyYq5XxXGt\n"}, {&ch9, "u^v\n"},
-                           {&ch10, "chin_chu_lan_cha\n"}, {&ch11, "gdb_rules\n"}, {&ch12, "normal\n"}};
+                           {&ch10, "chin_chu_lan_cha\n"}, {&ch11, "gdb_rules\n"}, {&ch12, "fibonacci\n"}};
 
 int checkAns(char* answer, char* resp){
 	if (strcmp(answer,resp)!=0) {

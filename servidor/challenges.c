@@ -98,9 +98,9 @@ void ch10(){
         return;
     }
 
-    printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.");
+    printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.\n");
 
-    if (system("./quine | diff - ../quine.c | grep \"a\"") != 0) {
+    if (system("./quine | diff - ./quine.c | grep \"a\"") != 0) {
         printf("\n%s\n", "diff encontró diferencias.");
         printf("\n\nENTER para reintentar.\n");
     } else{
@@ -120,6 +120,18 @@ void ch11(){
 
 void ch12(){
 	messageCh("Me conoces");
+
+	int a = 0;
+	int b = 1;
+	int c = 1;
+	for (int i = 0; i < 100; i++) {
+		a = b;
+		b = c;
+		c = b + a;
+		printf("%d  ",c);
+	}
+	printf("\n");
+
 	messageQ("¿Fue divertido?");
 }
 
