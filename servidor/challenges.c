@@ -100,7 +100,7 @@ void ch10(){
 
     printf("¡Genial!, ya lograron meter un programa en quine.c, veamos si hace lo que corresponde.\n");
 
-    if (system("./quine | diff - ./quine.c | grep \"a\"") != 0) {
+    if (system("./quine | diff - ./quine.c") != 0) {
         printf("\n%s\n", "diff encontró diferencias.");
         printf("\n\nENTER para reintentar.\n");
     } else{
@@ -124,7 +124,7 @@ void ch12(){
 	int a = 0;
 	int b = 1;
 	int c = 1;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 15; i++) {
 		a = b;
 		b = c;
 		c = b + a;
