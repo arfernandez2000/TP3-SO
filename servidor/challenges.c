@@ -14,7 +14,7 @@ void filter(){
 	char *str = "La respuesta es K5n2UFfpFMUN";
     int len = strlen(str);
 
-    srand(getpid());
+    srand(time(NULL));
 
     for (int i = 0; i < len; i++) {
         int limit = (rand() % 11);

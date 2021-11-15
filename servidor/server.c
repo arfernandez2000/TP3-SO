@@ -9,6 +9,7 @@
 #include <math.h>
 #include <unistd.h>
 #include "challenges.h"
+#include "../myError.h"
 
 #define PORT 8080
 #define SO_REUSEPORT 15
@@ -25,13 +26,6 @@ int checkAns(char* answer, char* resp){
         return 0;
     }
     return 1;
-}
-
-void checkError(int resp, char* func){
-	if (resp == -1){
-        perror(func);
-        exit(-1);
-    }
 }
 
 static const char* surprise = "too_easy";
@@ -53,19 +47,30 @@ void foo() {
 }
 
 void init(int *serverFd, int *opt, struct sockaddr_in *sAddress, int *aLen, int *socketFd, FILE **socketFile){
-	checkError(*serverFd = socket(AF_INET, SOCK_STREAM, 0),"socket");
-	checkError(setsockopt(*serverFd, SOL_SOCKET, SO_REUSEADDR, opt, sizeof(*opt)),"setsockopt");
+    if((*serverFd = socket(AF_INET, SOCK_STREAM, 0)) == ERROR){
+	   myError("socket failed");
+    }
+    if(setsockopt(*serverFd, SOL_SOCKET, SO_REUSEADDR, opt, sizeof(*opt)) == ERROR){
+       myError("setsockopt failed");
+    }
 
     sAddress->sin_family = AF_INET;
     sAddress->sin_addr.s_addr = INADDR_ANY;
     sAddress->sin_port = htons(PORT);
 
-    checkError(bind(*serverFd, (struct sockaddr *)sAddress, sizeof(*sAddress)), "bind");
-    checkError(listen(*serverFd, 1),"listen");
-    checkError(*socketFd = accept(*serverFd, (struct sockaddr *)sAddress, (socklen_t *) aLen),"accept");
+    if(bind(*serverFd, (struct sockaddr *)sAddress, sizeof(*sAddress)) == ERROR){
+       myError("bind failed");
+    }
+    if(listen(*serverFd, 1) == ERROR){
+       myError("listen failed");
+    }
+    if((*socketFd = accept(*serverFd, (struct sockaddr *)sAddress, (socklen_t *) aLen)) == ERROR){
+       myError("accept failed");
+    }
+
 
     if ((*socketFile = fdopen(*socketFd, "r")) == NULL) {
-        checkError(-1,"fdopen");
+        myError("fdopen failed");
     }
 }
 
@@ -80,8 +85,9 @@ int main(int argc, char const *argv[]) {
 	int count = 0;
     char *buffer = NULL;
     size_t buffSize = 0;
-    srand(getpid());
-    
+
+    system("clear");
+
     while (count < TOTAL_CH ) {
         ch_t challenge = challenges[count];
         (challenge.func)();
@@ -92,18 +98,27 @@ int main(int argc, char const *argv[]) {
             perror("getline");
             return -1;
         }
-        
+        system("clear");        
     }
 
     if (count >= TOTAL_CH)
         printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
 
     free(buffer);
+
     if (fclose(socketFile) == EOF) {
-        checkError(-1,"fclose");
+        myError("fclose failed");
     }
-    checkError(close(serverFd), "close1");
-    checkError(close(socketFd), "close2");
+
+    if (close(serverFd) == ERROR) {
+        myError("close1 failed");
+    }
+
+    printf("%d\n", socketFd);
+
+    if (close(socketFd) == ERROR) {
+        myError("close2 failed");
+    }
 
     return 0;
 }
