@@ -27,7 +27,7 @@ void ch4();
 
 void ch5();
 
-void ch6();
+void ch6() __attribute__((section(".RUN_ME")));
 
 void ch7();
 

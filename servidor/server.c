@@ -28,8 +28,6 @@ int checkAns(char* answer, char* resp){
     return 1;
 }
 
-static const char* surprise = "too_easy";
-
 static const char* easter_egg =  
 "_______________________\n"
 "< ESTO ES UN EASTER_EGG >\n"
@@ -40,10 +38,12 @@ static const char* easter_egg =
 "| '--'I|| '--'T|| '--'B|| '--'A|\n"
 "`------'`------'`------'`------'\n";
 
-void foo() __attribute__((section(".RUN_ME")));
+int foo() {
+	return strlen(easter_egg);
+}
 
-void foo() {
-	return;
+void doNothing(){
+    return;
 }
 
 void init(int *serverFd, int *opt, struct sockaddr_in *sAddress, int *aLen, int *socketFd, FILE **socketFile){
@@ -112,6 +112,12 @@ int main(int argc, char const *argv[]) {
 
     if (close(serverFd) == ERROR) {
         myError("close1 failed");
+    }
+
+    static const char* surprise = "too_easy";
+
+    if(surprise != NULL){
+        doNothing();
     }
 
     return 0;

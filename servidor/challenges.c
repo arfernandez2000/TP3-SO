@@ -65,7 +65,7 @@ void ch4(){
 }
 
 void ch5(){
-	messageCh("respuesta = strings:56"); //PRESTAR ATENCION
+	messageCh("respuesta = strings:194"); //PRESTAR ATENCION
 	messageQ("¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?");
 }
 
