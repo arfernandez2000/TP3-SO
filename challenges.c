@@ -55,18 +55,18 @@ void ch4(){
 }
 
 void ch5(){
-	messageCh("respuesta = strings:277"); //TODO: ver como cambiar o hacer que aparezca too_easy en el strings
+	messageCh("respuesta = strings:52"); 
 	messageQ("¿Cómo garantiza TCP que los paquetes llegan en orden y no se pierden?");
 }
 
 void ch6(){
-	messageCh(".data .bss .comment ? .shstrtab .symtab .strtab"); //TODO: ver como hacer para que aparezca el .RUN_ME en el strings
+	messageCh(".plt.got .plt.sec .text ? .fini .rodata .eh_frame_hdr"); 
 	messageQ("Un servidor suele crear un nuevo proceso o thread para atender las conexiones entrantes. ¿Qué conviene más?");
 }
 
 void ch7(){
 	messageCh("Filter error");
-	filter(); //TODO: al redirigirlo igual no funciona
+	filter(); 
 	messageQ("¿Cómo se puede implementar un servidor que atienda muchas conexiones sin usar procesos ni threads?");
 }
 

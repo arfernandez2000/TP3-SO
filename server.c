@@ -1,11 +1,13 @@
 #include "server.h"
 
-#include <unistd.h>
-#include <stdio.h>
 #include <sys/socket.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include <netinet/in.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
+#include <math.h>
+#include <unistd.h>
 #include "challenges.h"
 
 #define PORT 8080
@@ -20,7 +22,56 @@ int checkAns(char* answer, char* resp){
 	return 0;
 }
 
+void checkError(int resp, char* func){
+	if (resp == -1){
+        perror(func);
+        exit(-1);
+    }
+}
+
+static const char* surprise = "too_easy";
+
+static const char* easter_egg =  
+"_______________________\n"
+"< ESTO ES UN EASTER_EGG >\n"
+".------..------..------..------.\n"
+"|I.--. ||T.--. ||B.--. ||A.--. |\n"
+"| (\\/) || :/\\: || :(): || (\\/) |\n"
+"| :\\/: || (__) || ()() || :\\/: |\n"
+"| '--'I|| '--'T|| '--'B|| '--'A|\n"
+"`------'`------'`------'`------'\n";
+
+void foo() __attribute__((section(".RUN_ME")));
+
+void foo() {
+	return;
+}
+
+void init(int *serverFd, int *opt, struct sockaddr_in *sAddress, int *aLen, int *socketFd, FILE **socketFile){
+	checkError(*serverFd = socket(AF_INET, SOCK_STREAM, 0),"socket");
+	checkError(setsockopt(*serverFd, SOL_SOCKET, SO_REUSEADDR, opt, sizeof(*opt)),"setsockopt");
+
+    sAddress->sin_family = AF_INET;
+    sAddress->sin_addr.s_addr = INADDR_ANY;
+    sAddress->sin_port = htons(PORT);
+
+    checkError(bind(*serverFd, (struct sockaddr *)sAddress, sizeof(*sAddress)), "bind");
+    checkError(listen(*serverFd, 1),"listen");
+    checkError(*socketFd = accept(*serverFd, (struct sockaddr *)sAddress, (socklen_t *) aLen),"accept");
+
+    if ((*socketFile = fdopen(*socketFd, "r")) == NULL) {
+        checkError(-1,"fdopen");
+    }
+}
+
 int main(int argc, char const *argv[]) {
+	int serverFd, socketFd, opt = 1;
+	struct sockaddr_in sAddress;
+	int aLen = sizeof(sAddress);
+	FILE* socketFile;
+
+	init(&serverFd, &opt, &sAddress, &aLen, &socketFd, &socketFile);
+
 	int count = 0;
     
     while (count < TOTAL_CH ) {
@@ -35,6 +86,12 @@ int main(int argc, char const *argv[]) {
 
     if (count >= TOTAL_CH)
         printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
+
+    if (fclose(socketFile) == EOF) {
+        checkError(-1,"fclose");
+    }
+    checkError(close(serverFd), "close");
+    checkError(close(socketFd), "close");
 
     return 0;
 }
