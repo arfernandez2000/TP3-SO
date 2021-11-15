@@ -14,7 +14,7 @@
 #define MAX_CHAR 126
 
 typedef struct {
-    void (*number)();
+    void (*func)();
     char ans[ANS_SIZE];
 } ch_t;
 

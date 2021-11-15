@@ -19,7 +19,12 @@ ch_t challenges[TOTAL_CH] = {{&ch1,"entendido\n"}, {&ch2,"itba\n"}, {&ch3, "M4GF
                            {&ch10, "chin_chu_lan_cha\n"}, {&ch11, "gdb_rules\n"}, {&ch12, "normal\n"}};
 
 int checkAns(char* answer, char* resp){
-	return 0;
+	if (strcmp(answer,resp)!=0) {
+        printf("\nWrong answer: %s\n",resp);
+        sleep(2);
+        return 0;
+    }
+    return 1;
 }
 
 void checkError(int resp, char* func){
@@ -73,25 +78,32 @@ int main(int argc, char const *argv[]) {
 	init(&serverFd, &opt, &sAddress, &aLen, &socketFd, &socketFile);
 
 	int count = 0;
+    char *buffer = NULL;
+    size_t buffSize = 0;
+    srand(getpid());
     
     while (count < TOTAL_CH ) {
-        ch_t challenge = challenges[count++];
-        (challenge.number)();
-        //ver como conseguir la resp 
-        //con read??
-        //checkAns(challange.ans)
-        sleep(5);
-        system("clear");
+        ch_t challenge = challenges[count];
+        (challenge.func)();
+ 
+        if (getline(&buffer,&buffSize,socketFile) > 0){
+            count += checkAns(challenge.ans,buffer);
+        } else {
+            perror("getline");
+            return -1;
+        }
+        
     }
 
     if (count >= TOTAL_CH)
         printf("Felicitaciones, finalizaron el juego. Ahora deberán implementar el servidor que se comporte como el servidor provisto\n");
 
+    free(buffer);
     if (fclose(socketFile) == EOF) {
         checkError(-1,"fclose");
     }
-    checkError(close(serverFd), "close");
-    checkError(close(socketFd), "close");
+    checkError(close(serverFd), "close1");
+    checkError(close(socketFd), "close2");
 
     return 0;
 }
