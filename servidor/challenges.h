@@ -9,8 +9,6 @@
 
 #define TOTAL_CH 12
 #define ANS_SIZE 20
-#define LOWER 70
-#define UPPER 100
 #define MIN_CHAR 33
 #define MAX_CHAR 126
 

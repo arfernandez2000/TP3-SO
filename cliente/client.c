@@ -58,7 +58,6 @@ static void getAns(int serverFd) {
                     playing = 0;
                 }
             }
-            printf("readChars: %d\n", readChars);
         }
     }
 

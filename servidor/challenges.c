@@ -1,16 +1,18 @@
 #include "challenges.h"
 
-void messageCh(char* challenge){
+#define MAGIC_PID 0x12345678
+
+static void messageCh(char* challenge){
 	printf("------------- DESAFIO -------------\n");
 	printf("%s\n\n", challenge);
 }
 
-void messageQ(char* question){
+static void messageQ(char* question){
 	printf("----- PREGUNTA PARA INVESTIGAR -----\n");
 	printf("%s\n", question);
 }
 
-void filter(){
+static void filter(){
 	char *str = "La respuesta es K5n2UFfpFMUN";
     int len = strlen(str);
 
@@ -27,6 +29,14 @@ void filter(){
         write(STDOUT_FILENO, str + i, 1);
     }
     printf("\n\n");
+}
+
+static void gdbme() {
+    if (getpid() == MAGIC_PID) {
+        printf("La respuesta es gdb_rules\n\n");
+    } else {
+        printf("ENTER para reintentar\n\n");
+    }
 }
 
 void ch1(){
@@ -102,6 +112,9 @@ void ch10(){
 
 void ch11(){
 	messageCh("b gdbme y encontrá el valor mágico");
+
+	gdbme();
+
 	messageQ("¿Qué es un RFC?");
 }
 
